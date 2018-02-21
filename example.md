@@ -5,6 +5,7 @@
 * Data Selection
 * Aritmatic Exp
 * Where Clause
+* Comparation Operator
 
 ## Installation
 ## Login with SQLplus 
@@ -51,3 +52,37 @@ select upper('HeLLo WoRld') from dual;
 select lower('Hello WorlD') from dual;
 ```
 
+## Comparation Operator
+```sql
+select first_name, last_name, salary from employees 
+where salary = 24000;
+select first_name, last_name, salary from employees 
+where salary >= 12000;
+select first_name, last_name, salary from employees 
+where salary <> 24000;
+select first_name, last_name, salary from employees 
+where salary != 24000;
+```
+
+### Is Null and Is Not Null
+```sql
+select first_name, last_name, salary, commission_pct from employees
+where commission_pct is not null;
+```
+
+### Between
+```sql
+select first_name, last_name, salary from employees
+where salary between 10000 and 15000;
+select first_name, last_name, salary from employees
+where salary > 10000 and salary < 15000;
+```
+
+### AND and OR
+```sql
+select first_name, last_name, salary from employees
+where FIRST_NAME = 'Lex' and (SALARY = 17000 OR 1 = 0);
+  
+select first_name, last_name, salary from employees
+where SALARY = 17000 OR (1=0 AND FIRST_NAME = 'Lex');
+```
