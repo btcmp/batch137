@@ -114,6 +114,37 @@ select lower('agBDfdLls') from dual;
 Define first_name2 = 'Rifky'
 Define last_name2 = 'nugraha'
 select Upper('&first_name2' || ' ' || '&last_name2') from dual;
+
+-- 3. InitCap
+Define word1 = 'inDoneSia'
+Define word2 = 'jaYa'
+select initcap('&word1' || ' ' || '&word2') from dual;
+select 
+  initcap(last_name || ' ' || email) as fullname,
+  salary
+from employees where employee_id = 100;
+
+-- concat
+-- untuk menyambung String
+define word1 = 'hello'
+define word2 = 'world'
+select concat('&word1', ' &word2') from dual;
+select 'hello' || 'world' || 'apik' from dual;
+
+-- trim
+define word1 = '   hello         sdldl fsl     '
+select '&word1' from dual;
+select trim('&word1') from dual;
+
+-- round
+select round(7.54567, 2) from dual;
+select trunc(7.54167, 2) from dual;
+select mod(98, 100) from dual;
+
+-- date
+select sysdate from dual;
+select first_name, hire_date from employees where hire_date = to_date('JUN-17-03', 'MM-DD-YY');
+
 ```
 
 ## Group Function
