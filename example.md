@@ -46,6 +46,8 @@ from employees;
 ## Where Clause
 ```sql
 select * from employees where employee_id = 104;
-select * from employees where first_name = 'lex';
+select * from employees where upper(first_name) = upper('lex');
+select upper('HeLLo WoRld') from dual;
+select lower('Hello WorlD') from dual;
 ```
 
