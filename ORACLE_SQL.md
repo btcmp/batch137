@@ -9,7 +9,14 @@
 * Order by 
 * Single Row Function
 * Group Function
+* Multiple Table
+	* inner 
+	* Outer
+		* Left
+		* Right
 
+* DDL
+	* CREATE
 
 ## Installation
 ## Login with SQLplus 
@@ -184,6 +191,133 @@ select * from employees where first_name='David'
 -- ALL => (AND)
 ```
 
+## Multiple Table
+### Inner JOIN
+```sql
+select 
+  employee_id,
+  first_name,
+  last_name,
+  emp.department_id,
+  dept.department_id,
+  dept.department_name,
+  salary,
+  loc.street_address as "alamat kantor"
+from employees emp
+inner join departments dept
+on emp.department_id = dept.department_id
+inner join locations loc
+on loc.location_id = dept.location_id
+```
+
+### Left Outer JOIN
+```sql
+select 
+  emp.first_name,
+  emp.last_name,
+  dept.department_name,
+  loc.STREET_ADDRESS
+from employees emp
+left outer join departments dept
+on emp.department_id = dept.department_id
+left outer join locations loc
+on dept.location_id = loc.location_id
+```
+### Rigth Outer JOIN
+```sql
+select 
+   emp.first_name,
+  emp.last_name,
+  dept.department_name,
+  emp.department_id,
+  dept.department_id
+from employees emp
+right outer join departments dept
+on emp.department_id = dept.department_id
+```
+
+## DDL (Data Definition Language)
+### Contstraint
+```sql
+drop table department_137;
+CREATE TABLE department_137(
+  id int,
+  name_department varchar2(144),
+  email varchar2(144),
+  constraint cons_dpet_pk primary key(id),
+  constraint cons_email_un unique(email)
+);
+```
+
+### Foreign key Constraint 
+```sql
+drop table employees_137;
+create table employees_137(
+  id int,
+  name varchar2(144),
+  address varchar2(144) not null,
+  email varchar2(144),
+  department_id int,
+  constraint cons_emp_pk primary key(id),
+  constraint cons_email_emp unique(email),
+  constraint cons_reff_dept foreign key(department_id)
+  references department_137(id)
+);
+```
+
+## DML
+#### Insert 
+```sql
+insert into department_137(id, name_department, email) values (3, 'infrastruktur3', 'infra3@xsis.co.id'); 
+insert into department_137(id, name_department, email) values (4, 'infrastruktur3', 'infra4@xsis.co.id');
+insert into department_137(id, name_department, email) values (5, 'infrastruktur3', 'infra5@xsis.co.id');
+insert into department_137(id, name_department, email) values (6, 'infrastruktur3', 'infra6@xsis.co.id');
+select * from department_137;
+```
+
 Tugas :
-buat pengelompakan data berdasarkan job_id, 
+1. buat pengelompakan data berdasarkan job_id, 
 yang total gaji diatas gaji steven king
+
+2. Hitung gaji rata rata bedasarkan department.
+```sql
+select round(avg(salary), 2) as rata2, dept.department_name 
+from employees emp
+inner join departments dept
+on emp.department_id = dept.department_id
+group by dept.department_name
+order by rata2
+```
+
+3. Hitung gaji rata rata bedasarkan department 
+yang gaji totalnya diatas department "Marketing".
+```sql
+select round(avg(salary), 2) as rata2, dept.department_name 
+from employees emp
+inner join departments dept
+on emp.department_id = dept.department_id
+group by dept.department_name
+having sum(emp.salary) > (select sum(emp.salary)
+from employees emp
+inner join departments dept
+on emp.department_id = dept.department_id
+where dept.department_name = 'Marketing'
+)
+order by rata2
+```
+
+4. tampilkan data employee dengan menampikan nama manager.
+ 1. first_name employee 
+ 2. email employee
+ 3. nama manager(first_name)
+```sql
+select 
+  emp.first_name,
+  emp.email,
+  mng.first_name
+from employees emp
+left outer join employees mng
+on emp.manager_id = mng.employee_id;
+```
+
+
