@@ -25,6 +25,8 @@
 	 <property name="annotatedClasses">
 			<list>
 				<value>com.xsis.batch137.model.Employee</value>
+				<value>com.xsis.batch137.model.Mahasiswa</value>
+				<value>com.xsis.batch137.model.Jurusan</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

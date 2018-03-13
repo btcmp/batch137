@@ -24,4 +24,14 @@
 	<mvc:annotation-driven />
 	<!-- untuk membuat path resources assets-->	
 	<mvc:resources mapping="/resources/**" location="/resources/"/>
+	
+	<mvc:annotation-driven>
+	  <mvc:message-converters>
+	    <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	      <property name="objectMapper">
+	        <bean class="com.pastelstudios.json.HibernateAwareObjectMapper" />
+	      </property>
+	    </bean> 
+	  </mvc:message-converters> 
+	</mvc:annotation-driven>
 </beans>

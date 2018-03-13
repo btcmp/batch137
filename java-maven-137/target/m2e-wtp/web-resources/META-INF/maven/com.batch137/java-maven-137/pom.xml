@@ -216,15 +216,47 @@
 		<version>11.2.0</version>
 	</dependency>
 	<dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-core</artifactId>
-        <version>2.4.3</version>
-    </dependency>
-    <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-databind</artifactId>
-        <version>2.4.3</version>
-    </dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-core</artifactId>
+		<version>2.6.3</version>
+	</dependency>
+	<dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-databind</artifactId>
+		<version>2.6.3</version>
+	</dependency>   
+	<dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-annotations</artifactId>
+		<version>2.6.3</version>
+	</dependency>   
+	<!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-core-asl -->
+	<dependency>
+		<groupId>org.codehaus.jackson</groupId>
+		<artifactId>jackson-core-asl</artifactId>
+		<version>1.9.13</version>
+	</dependency>
+	 <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-hibernate4 -->
+	<dependency>
+		<groupId>com.fasterxml.jackson.datatype</groupId>
+		<artifactId>jackson-datatype-hibernate5</artifactId>
+		<version>2.9.2</version>
+	</dependency>
+	
+	<!-- Add form and hibernate validator -->
+	<dependency>
+	    <groupId>javax.validation</groupId>
+	    <artifactId>validation-api</artifactId>
+	    <version>1.0.0.GA</version>
+	</dependency>
+	
+	
+	<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
+	<dependency>
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate-validator</artifactId>
+	    <version>4.0.2.GA</version>
+	</dependency>
   </dependencies>
   <build>
     <finalName>java-maven-137</finalName>
