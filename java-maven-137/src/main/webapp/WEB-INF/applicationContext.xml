@@ -12,6 +12,7 @@
 		<context:component-scan base-package="com.xsis.batch137"></context:component-scan>
 		<context:annotation-config></context:annotation-config>
 		<tx:annotation-driven/>
+		
 		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		    <property name="driverClassName" value="${oracle.spring.DriverName}" />
 		    <property name="url" value="${oracle.spring.url}" />
@@ -24,14 +25,19 @@
 	 <property name="dataSource" ref="dataSource"></property>
 	 <property name="annotatedClasses">
 			<list>
-				<value>com.xsis.batch137.model.Employee</value>
+				<!-- <value>com.xsis.batch137.model.Employee</value>
 				<value>com.xsis.batch137.model.Mahasiswa</value>
-				<value>com.xsis.batch137.model.Jurusan</value>
+				<value>com.xsis.batch137.model.Jurusan</value> -->
+				<value>com.xsis.batch137.model.Customer</value>
+				<value>com.xsis.batch137.model.Barang</value>
+				<value>com.xsis.batch137.model.Order</value>
+				<value>com.xsis.batch137.model.Penjualan</value>
+				<value>com.xsis.batch137.model.DetailPenjualan</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.hbm2ddl.auto">validate</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate5.SpringSessionContext
@@ -50,4 +56,6 @@
 				<value>classpath:application.properties</value>
 			</property>
 		</bean>
+	
+	<import resource="spring-security.xml"/>
 </beans>
