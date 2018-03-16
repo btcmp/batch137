@@ -30,100 +30,43 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#dt-brg').DataTable({
-			searching: false
-		});
 		
-		$('#btn-search').on('click', function(){
-			var word = $('#search').val();
-			window.location="${pageContext.request.contextPath}/menu/src?search="+word;
-		});
-		
-		$('.btn-beli').on('click', function(){
-			var idCustomer = $('#id-customer').val();
-			var idBarang = $(this).attr('id');
-			var element = $(this).parent().parent();
-			var select = element.find('td').eq(2).find('select').val();
-			
-			var order = {
-				customer : {
-					id : idCustomer
-				},
-				barang : {
-					id : idBarang
-				},
-				jumlahBeli : select
-			};
-			
-			//ajax
-			$.ajax({
-				url : '${pageContext.request.contextPath}/menu/order',
-				type: 'POST',
-				data : JSON.stringify(order),
-				contentType: "application/json",
-				success: function(data){
-					alert('berhasil dipesan');
-				}, error : function(){
-					alert('order barang gagal');
-				}
-			});
-		});
-		
-		$('#go-order').on('click', function(){
-			var idCustomer = $('#id-customer').val();
-			window.location= "${pageContext.request.contextPath}/order?customer="+ idCustomer;
-		});
 	});
 </script>
 </head>
 <body>
 
 <div class="container">
-	<p>
-		<div>
-		pilih customer : 
-		<select id="id-customer">
-			<c:forEach items="${daftarCustomer}" var="customer">
-				<option value="${customer.id }">${customer.email }</option>
-			</c:forEach>
-		</select>
-		</div>
-	</p>
-	<div id="search-box">
-		<span>Search</span>
-		<span><input type="text" id="search" /></span>
-		<span><a id="btn-search" href="#" class="btn btn-primary">Search</a></span>
+	<div style="padding: 20px 0 20px 0;" id="info-pembelian">
+		<table>
+			<tr><th>Name</th><td>:</td><td>${customer.name }</td></tr>
+			<tr><th>Email</th><td>:</td><td>${customer.email }</td></tr>
+			<tr><th>Total Harga</th><td>:</td><td>${totalHarga }</td></tr>
+			<tr><th>Total Item</th><td>:</td><td>${totalItem }</td></tr>
+		</table>
 	</div>
-	
-	<div id="daftar-barang">
+	<div id="daftar-order">
 		<table id="dt-brg" class="table table-striped table-bordered" cellspacing="0" width="100%">
 		<thead>
 			<tr>
 				<th>Nama Barang</th>
 				<th>Harga</th>
 				<th>Jumlah</th>
-				<th>Beli</th>
+				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${daftarBarang }" var="barang">
+			<c:forEach items="${orders }" var="order">
 				<tr>
-					<td>${barang.namaBarang }</td>
-					<td>${barang.harga }</td>
-					<td>
-						<% int jml = 1; %>
-						<select class="jml-items">
-						<c:forEach begin="0" end="${barang.stock - 1}">
-							<option value="<%=jml%>" ><%=jml++%></option>
-					   </c:forEach>
-						</select>
-					</td>
-					<td><a href="#" id="${barang.id }" class="btn-beli btn btn-info">beli</a></td>
+					<td>${order.barang.namaBarang }</td>
+					<td>${order.barang.harga }</td>
+					<td>${order.jumlahBeli }</td>
+					<td><a href="#" id="${order.id }" class="btn-beli btn btn-info">cancel</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>	
 		</table>
-		<a href="#" id="go-order" class="btn btn-primary">Go to Order</a>
+		<a href="#" id="go-bayar" class="btn btn-primary">Bayar</a>
 	</div>
 </div>
 </body>

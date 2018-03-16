@@ -28,4 +28,10 @@ public class CustomerDaoImpl implements CustomerDao{
 		return session.createCriteria(Customer.class).list();
 	}
 
+	public Customer getCustomerById(String id) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		return session.get(Customer.class, id);
+	}
+
 }
